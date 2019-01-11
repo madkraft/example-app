@@ -1,0 +1,10 @@
+.header {
+  background-color: #ff6600;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-right: 2rem;
+}
