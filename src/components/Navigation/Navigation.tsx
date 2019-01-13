@@ -9,7 +9,7 @@ export class Navigation extends Component {
       </Link>,
       <Link key="submit" to="/submit">
         Submit
-      </Link>
+      </Link>,
     ];
   }
 }

@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import { Router } from "@reach/router";
+import { Router } from '@reach/router';
 import './App.css';
-import {Container, Header} from "./components";
+import { Container, Header } from './components';
 import { ListPage, SubmitPage } from './pages';
 import { addGapiScript } from './lib/gapi';
 
-interface State {
+interface IState {
   isSignedIn: boolean;
 }
 
-class App extends Component<{}, State> {
-  state = {
-    isSignedIn: false
-  }
+class App extends Component<{}, IState> {
+  public state = {
+    isSignedIn: false,
+  };
 
-  componentDidMount() {
+  public componentDidMount() {
     addGapiScript(this.updateSignInStatus);
   }
 
-  updateSignInStatus = (isSignedIn: boolean) => {
+  public updateSignInStatus = (isSignedIn: boolean) => {
     if (isSignedIn) {
-      this.setState(() => ({isSignedIn}))
+      this.setState(() => ({ isSignedIn }));
     }
   }
 
-  render() {
-    const {isSignedIn} = this.state;
+  public render() {
+    const { isSignedIn } = this.state;
 
     return (
       <div className="App">

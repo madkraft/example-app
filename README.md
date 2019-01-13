@@ -6,18 +6,22 @@ https://blog.416serg.me/building-an-app-using-google-sheets-api-react-d69681d22c
 Sheets docs:
 https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
 
-
 Use:
+
 - [ ] Context API
 - [ ] use service worker to cache response for specified time
 - [x] reach router
 - [ ] react lazy and suspense
+- [ ] recompose
+- [ ] react hooks
 
 Add:
-- [ ] prettier
-- [ ] tslint
+
+- [x] prettier
+- [x] tslint
 - [ ] Host on netlify
 - [ ] add Travis ci
 
 Try:
+
 - [ ] badger app

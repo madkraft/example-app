@@ -1,13 +1,20 @@
-import React, { Component } from 'react'
-import './ListArticle.css'
+import React, { Component } from 'react';
+import './ListArticle.css';
 import { Article } from '../../models';
 
-interface Props extends Article {}
+interface IProps extends Article {}
 
-export class ListArticle extends Component<Props> {
-  render() {
+export class ListArticle extends Component<IProps> {
+  public render() {
     return (
-      <a className="list-article" target="_blank" rel="noopener" href={this.props.url}>{this.props.title}</a>
-    )
+      <a
+        className="list-article"
+        target="_blank"
+        rel="noopener"
+        href={this.props.url}
+      >
+        {this.props.title}
+      </a>
+    );
   }
 }

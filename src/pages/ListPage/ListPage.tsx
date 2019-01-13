@@ -16,13 +16,13 @@ interface State {
 
 export function fetchValues(
   onFetchSuccess: (articles: Article[]) => void,
-  onFetchError: () => void
+  onFetchError: () => void,
 ) {
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
       .get({
         range: 'Sheet1',
-        spreadsheetId: sheetsConfig.spreadsheetId
+        spreadsheetId: sheetsConfig.spreadsheetId,
       })
       .then(
         (response: any) => {
@@ -36,22 +36,22 @@ export function fetchValues(
 
           onFetchSuccess(articles);
         },
-        () => onFetchError()
+        () => onFetchError(),
       );
   });
 }
 
 export class ListPage extends Component<Props, State> {
   public state = {
-    isLoading: false,
     articles: [],
-    error: null
+    error: null,
+    isLoading: false,
   };
 
   public componentDidMount() {
     if (this.props.isSignedIn) {
       this.setState(() => ({
-        isLoading: true
+        isLoading: true,
       }));
       fetchValues(this.onLoad, this.onError);
     }
@@ -60,7 +60,7 @@ export class ListPage extends Component<Props, State> {
   public componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isSignedIn !== this.props.isSignedIn) {
       this.setState(() => ({
-        isLoading: true
+        isLoading: true,
       }));
       fetchValues(this.onLoad, this.onError);
     }
@@ -68,15 +68,15 @@ export class ListPage extends Component<Props, State> {
 
   public onLoad = (articles: Article[]) => {
     this.setState(() => ({
+      articles,
       isLoading: false,
-      articles
     }));
   }
 
   public onError = () => {
     this.setState(() => ({
+      error: 'Could not fetch data',
       isLoading: false,
-      error: 'Could not fetch data'
     }));
   }
 
