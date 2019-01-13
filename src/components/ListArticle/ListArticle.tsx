@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './ListArticle.css';
 import { Article } from '../../models';
 
-interface IProps extends Article {}
-
-export class ListArticle extends Component<IProps> {
+export class ListArticle extends Component<Article> {
   public render() {
     return (
       <a

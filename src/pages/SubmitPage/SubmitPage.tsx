@@ -1,20 +1,20 @@
-import react, { Component, ChangeEvent } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { SubmitForm } from '../../models';
 import { addNewSubmition } from '../../lib/gapi';
 import './SubmitPage.css';
 
-interface Props extends RouteComponentProps {
+interface IProps extends RouteComponentProps {
   isSignedIn: boolean;
 }
 
-interface State extends SubmitForm {
+interface IState extends SubmitForm {
   error: string;
   isSubmitted: boolean;
 }
 
-export class SubmitPage extends Component<Props, State> {
-  public state: State = {
+export class SubmitPage extends Component<IProps, IState> {
+  public state = {
     error: '',
     isSubmitted: false,
     title: '',
@@ -65,15 +65,19 @@ export class SubmitPage extends Component<Props, State> {
     }));
   }
 
+  public renderSubmitSuccessMessage = () => {
+    if (this.state.isSubmitted) {
+      return <div className="submit-success">Successfully submitted!</div>;
+    }
+  }
+
   public render() {
-    const { error, title, url, isSubmitted } = this.state;
+    const { error, title, url } = this.state;
 
     return (
       <div>
         {error && <div className="submit-error">{error}</div>}
-        {isSubmitted && (
-          <div className="submit-success">Successfully submitted!</div>
-        )}
+        {this.renderSubmitSuccessMessage()}
         <label htmlFor="title">
           Title
           <input

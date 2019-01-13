@@ -19,6 +19,7 @@ Add:
 
 - [x] prettier
 - [x] tslint
+- [ ] stylelint
 - [ ] Host on netlify
 - [ ] add Travis ci
 

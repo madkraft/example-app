@@ -15,6 +15,17 @@ export class Header extends Component<IProps> {
     window.gapi.auth2.getAuthInstance().signOut();
   }
 
+  public renderSingInButtons = () => {
+    if (!this.props.isSignedIn) {
+      return (
+        <div>
+          <button onClick={this.handleSignInClick}>Sign in</button>
+          <button onClick={this.handleSignOutClick}>Sign out</button>
+        </div>
+      );
+    }
+  }
+
   public render() {
     const { isSignedIn } = this.props;
 
@@ -24,12 +35,7 @@ export class Header extends Component<IProps> {
           <span className="title">My Hacker News</span>
           <Navigation />
         </div>
-        {!isSignedIn && (
-          <div>
-            <button onClick={this.handleSignInClick}>Sign in</button>
-            <button onClick={this.handleSignOutClick}>Sign out</button>
-          </div>
-        )}
+        {this.renderSingInButtons()}
       </div>
     );
   }

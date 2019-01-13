@@ -7,14 +7,18 @@ interface IProps {
 }
 
 export class List extends Component<IProps> {
+  public renderListItem = (article: Article) => {
+    return (
+      <li key={article.id}>
+        <ListArticle {...article} />
+      </li>
+    );
+  }
+
   public render() {
     return (
       <ul>
-        {this.props.articles.map(article => (
-          <li key={article.id}>
-            <ListArticle {...article} />
-          </li>
-        ))}
+        {this.props.articles.map(article => this.renderListItem(article))}
       </ul>
     );
   }
