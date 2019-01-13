@@ -8,7 +8,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.tsx' --project tsconfig.json",
-    "deploy": "yarn test && yarn lint && yarn build"
+    "deploy": "CI=true yarn test && yarn lint && yarn build"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
