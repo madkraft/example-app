@@ -20,8 +20,8 @@ const handleClientLoad = (
   window.gapi.load('client:auth2', () => {
     window.gapi.client
       .init({
-        apiKey: sheetsConfig.apiKey,
-        clientId: sheetsConfig.clientId,
+        apiKey: process.env.REACT_APP_API_KEY,
+        clientId: process.env.REACT_APP_CLIENT_ID,
         discoveryDocs: [
           'https://sheets.googleapis.com/$discovery/rest?version=v4',
         ],
@@ -45,7 +45,7 @@ export function fetchValues(
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
       .get({
-        range: 'Sheet1',
+        range: sheetsConfig.range,
         spreadsheetId: sheetsConfig.spreadsheetId,
       })
       .then(
@@ -72,8 +72,8 @@ export const addNewSubmition = (
   const id = new Date().getTime().toString();
   const { title, url } = submitForm;
   const params = {
-    range: 'Sheet1',
-    spreadsheetId: '1_CgPF5ax_x1NrODpOx9-vtGSIPPH03tTtfCMTTscX1w',
+    range: sheetsConfig.range,
+    spreadsheetId: sheetsConfig.spreadsheetId,
     valueInputOption: 'RAW',
   };
 

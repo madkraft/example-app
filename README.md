@@ -21,8 +21,9 @@ Add:
 - [x] tslint
 - [ ] stylelint
 - [ ] git hooks with husky
-- [ ] Host on netlify
+- [ ] Host on netlify https://app.netlify.com/sites/optimistic-ride-596734/overview
 - [ ] add Travis ci
+- [ ] server-side rendering
 
 Try:
 
