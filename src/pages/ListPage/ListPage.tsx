@@ -4,7 +4,9 @@ import { Article } from '../../models';
 import { sheetsConfig } from '../../config';
 import { List } from '../../components';
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps {
+  isSignedIn: boolean;
+}
 
 interface State {
   isLoading: boolean;
@@ -41,31 +43,21 @@ export class ListPage extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // make a fetch layer and move to utils
-    window.gapi.load("client", this.initClient);
+    if (this.props.isSignedIn) {
+      this.setState(() => ({
+        isLoading: true
+      }));
+      fetchValues(this.onLoad, this.onError)
+    }
   }
 
-  // move to utils
-  initClient = () => {
-    const {apiKey, discoveryDocs} = sheetsConfig;
-    
-    window.gapi.client
-      .init({apiKey, discoveryDocs})
-      .then(this.onClientInitSuccess, this.onClientInitFailure);
-  };
-
-  onClientInitSuccess = () => {
-    this.setState(() => ({
-      isLoading: true
-    }))
-    fetchValues(this.onLoad, this.onError)
-  }
-
-  onClientInitFailure = () => {
-    this.setState(() => ({
-      isLoading: false,
-      error: 'Could not initialize google client'
-    }))
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.isSignedIn !== this.props.isSignedIn) {
+      this.setState(() => ({
+        isLoading: true
+      }));
+      fetchValues(this.onLoad, this.onError)
+    }
   }
 
   onLoad = (articles: Article[]) => {

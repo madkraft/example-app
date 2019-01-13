@@ -1,0 +1,21 @@
+.submit-input {
+  padding: 1rem;
+  width: 100%;
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.submit-button {
+  padding: 1.5rem 2.5rem;
+  font-size: 2rem;
+}
+
+.submit-error {
+  color: red;
+}
+
+.submit-success {
+  color: white;
+  background: green;
+}

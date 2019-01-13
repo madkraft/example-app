@@ -4,3 +4,8 @@ export interface Article {
   url: string;
   tags?: string[];
 }
+
+export interface SubmitForm {
+  title: string;
+  url: string;
+}

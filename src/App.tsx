@@ -3,16 +3,37 @@ import { Router } from "@reach/router";
 import './App.css';
 import {Container, Header} from "./components";
 import { ListPage, SubmitPage } from './pages';
+import { addGapiScript } from './lib/gapi';
 
-class App extends Component {
+interface State {
+  isSignedIn: boolean;
+}
+
+class App extends Component<{}, State> {
+  state = {
+    isSignedIn: false
+  }
+
+  componentDidMount() {
+    addGapiScript(this.updateSignInStatus);
+  }
+
+  updateSignInStatus = (isSignedIn: boolean) => {
+    if (isSignedIn) {
+      this.setState(() => ({isSignedIn}))
+    }
+  }
+
   render() {
+    const {isSignedIn} = this.state;
+
     return (
       <div className="App">
-        <Header />
+        <Header isSignedIn={isSignedIn} />
         <Container>
           <Router>
-            <ListPage path="/" />
-            <SubmitPage path="/submit" />
+            <ListPage isSignedIn={isSignedIn} path="/" />
+            <SubmitPage isSignedIn={isSignedIn} path="/submit" />
           </Router>
         </Container>
       </div>

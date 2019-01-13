@@ -8,13 +8,16 @@ https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/g
 
 
 Use:
-[] Context API
-[] use service worker to cache response for specified time
-[x] reach router
+- [ ] Context API
+- [ ] use service worker to cache response for specified time
+- [x] reach router
+- [ ] react lazy and suspense
 
 Add:
-[] prettier
-[] tslint
+- [ ] prettier
+- [ ] tslint
+- [ ] Host on netlify
+- [ ] add Travis ci
 
 Try:
-[] badger app
+- [ ] badger app
