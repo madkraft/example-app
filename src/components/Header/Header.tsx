@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
 import { Navigation } from '../Navigation';
 import './Header.css';
 
@@ -7,11 +7,11 @@ interface IProps {
 }
 
 export class Header extends Component<IProps> {
-  public handleSignInClick = (event: any) => {
+  public handleSignInClick = () => {
     window.gapi.auth2.getAuthInstance().signIn();
   }
 
-  public handleSignOutClick = (event: any) => {
+  public handleSignOutClick = () => {
     window.gapi.auth2.getAuthInstance().signOut();
   }
 
@@ -27,8 +27,6 @@ export class Header extends Component<IProps> {
   }
 
   public render() {
-    const { isSignedIn } = this.props;
-
     return (
       <div className="header">
         <div>

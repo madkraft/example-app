@@ -20,6 +20,7 @@ Add:
 - [x] prettier
 - [x] tslint
 - [ ] stylelint
+- [ ] git hooks with husky
 - [ ] Host on netlify
 - [ ] add Travis ci
 

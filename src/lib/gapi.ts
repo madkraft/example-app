@@ -87,7 +87,7 @@ export const addNewSubmition = (
   );
 
   request.then(
-    (response: any) => {
+    () => {
       onSubmitSuccess();
     },
     (reason: any) => {
