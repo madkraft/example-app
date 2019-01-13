@@ -1,2 +1,2 @@
-export * from './ListPage'
-export * from './SubmitPage'
+export * from './ListPage';
+export * from './SubmitPage';

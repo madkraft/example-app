@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import react, { Component } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Article } from '../../models';
 import { sheetsConfig } from '../../config';
@@ -10,77 +10,83 @@ interface Props extends RouteComponentProps {
 
 interface State {
   isLoading: boolean;
-  articles: Article[]
+  articles: Article[];
   error: null | string;
 }
 
-export function fetchValues(onFetchSuccess: (articles: Article[]) => void, onFetchError: () => void) {
-  window.gapi.client.load("sheets", "v4", () => {
+export function fetchValues(
+  onFetchSuccess: (articles: Article[]) => void,
+  onFetchError: () => void
+) {
+  window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
       .get({
-        spreadsheetId: sheetsConfig.spreadsheetId,
-        range: "Sheet1"
+        range: 'Sheet1',
+        spreadsheetId: sheetsConfig.spreadsheetId
       })
-      .then((response: any) => {
-        const [ , ...values] = response.result.values;
-        const articles: Article[] = values.map((article: string[]) => {
-          const [id, title, url, tagsRaw] = article;
-          const tags = tagsRaw ? tagsRaw.split(',') : null;
+      .then(
+        (response: any) => {
+          const [, ...values] = response.result.values;
+          const articles: Article[] = values.map((article: string[]) => {
+            const [id, title, url, tagsRaw] = article;
+            const tags = tagsRaw ? tagsRaw.split(',') : null;
 
-          return {id, title, url, tags}
-        })
+            return { id, title, url, tags };
+          });
 
-        onFetchSuccess(articles);
-      }, () => onFetchError())
+          onFetchSuccess(articles);
+        },
+        () => onFetchError()
+      );
   });
 }
 
 export class ListPage extends Component<Props, State> {
-  state = {
+  public state = {
     isLoading: false,
     articles: [],
     error: null
-  }
+  };
 
-  componentDidMount() {
+  public componentDidMount() {
     if (this.props.isSignedIn) {
       this.setState(() => ({
         isLoading: true
       }));
-      fetchValues(this.onLoad, this.onError)
+      fetchValues(this.onLoad, this.onError);
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  public componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isSignedIn !== this.props.isSignedIn) {
       this.setState(() => ({
         isLoading: true
       }));
-      fetchValues(this.onLoad, this.onError)
+      fetchValues(this.onLoad, this.onError);
     }
   }
 
-  onLoad = (articles: Article[]) => {
+  public onLoad = (articles: Article[]) => {
     this.setState(() => ({
       isLoading: false,
       articles
     }));
-  };
+  }
 
-  onError = () => {
+  public onError = () => {
     this.setState(() => ({
       isLoading: false,
       error: 'Could not fetch data'
-    }))
+    }));
   }
 
-  render() {
-    const {articles, error, isLoading} = this.state;
+  public render() {
+    const { articles, error, isLoading } = this.state;
 
     if (error) {
       return <div>Oh no! {error}</div>;
     }
 
-    return isLoading ? <div>loading...</div> : <List articles={articles} />
+    return isLoading ? <div>loading...</div> : <List articles={articles} />;
   }
 }

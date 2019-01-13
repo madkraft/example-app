@@ -15,7 +15,6 @@ const handleClientLoad = (updateSignInStatus: (isSignedIn: boolean) => void) => 
   });
 }
 
-// https://cleverbeagle.com/blog/articles/tutorial-how-to-load-third-party-scripts-dynamically-in-javascript
 export const addGapiScript = (updateSignInStatus: (isSignedIn: boolean) => void) => {
   const s = document.createElement('script');
   s.src = "https://apis.google.com/js/api.js";

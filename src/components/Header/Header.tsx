@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import './Header.css'
+import react, { Component } from 'react';
 import { Navigation } from '../Navigation';
+import './Header.css';
 
-interface Props {
+interface IProps {
   isSignedIn: boolean;
 }
 
-export class Header extends Component<Props> {
-  handleSignInClick = (event: any) => {
+export class Header extends Component<IProps> {
+  public handleSignInClick = (event: any) => {
     window.gapi.auth2.getAuthInstance().signIn();
   }
-  
-  handleSignOutClick = (event: any) => {
+
+  public handleSignOutClick = (event: any) => {
     window.gapi.auth2.getAuthInstance().signOut();
   }
 
-  render() {
-    const {isSignedIn} = this.props;
+  public render() {
+    const { isSignedIn } = this.props;
 
     return (
       <div className="header">
@@ -24,11 +24,13 @@ export class Header extends Component<Props> {
           <span className="title">My Hacker News</span>
           <Navigation />
         </div>
-        {!isSignedIn && (<div>
-          <button onClick={this.handleSignInClick}>Sign in</button>
-          <button onClick={this.handleSignOutClick}>Sign out</button>
-        </div>)}
+        {!isSignedIn && (
+          <div>
+            <button onClick={this.handleSignInClick}>Sign in</button>
+            <button onClick={this.handleSignOutClick}>Sign out</button>
+          </div>
+        )}
       </div>
-    )
+    );
   }
 }
