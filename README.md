@@ -4,29 +4,33 @@ Google console:
 https://console.developers.google.com/apis/dashboard?project=articles&duration=PT1H
 
 Host on netlify
-https://blog.416serg.me/building-an-app-using-google-sheets-api-react-d69681d22ce1
+https://app.netlify.com/sites/optimistic-ride-596734/overview
 
 Sheets docs:
 https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+
+Next:
+
+- [ ] git hooks with husky
+- [ ] styled-components
+- [ ] Remove posts
+- [ ] recompose
+- [ ] react lazy and suspense
 
 Use:
 
 - [ ] Context API
 - [ ] use service worker to cache response for specified time
 - [x] reach router
-- [ ] react lazy and suspense
-- [ ] recompose
 - [ ] react hooks
 
 Add:
 
 - [x] prettier
 - [x] tslint
-- [ ] stylelint
-- [ ] git hooks with husky
-- [ ] Host on netlify https://app.netlify.com/sites/optimistic-ride-596734/overview
-- [ ] add Travis ci
+- [x] Host on netlify
 - [ ] server-side rendering
+- [ ] stylelint with styled components?
 
 Try:
 
