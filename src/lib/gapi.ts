@@ -5,7 +5,7 @@ export const addGapiScript = (
   updateSignInStatus: (isSignedIn: boolean) => void,
 ) => {
   const s = document.createElement('script');
-  s.src = 'https://apis.google.com/js/api.js';
+  s.src = sheetsConfig.script;
   s.onload = () => {
     handleClientLoad(updateSignInStatus);
   };
@@ -20,12 +20,10 @@ const handleClientLoad = (
   window.gapi.load('client:auth2', () => {
     window.gapi.client
       .init({
-        apiKey: process.env.REACT_APP_API_KEY,
-        clientId: process.env.REACT_APP_CLIENT_ID,
-        discoveryDocs: [
-          'https://sheets.googleapis.com/$discovery/rest?version=v4',
-        ],
-        scope: 'https://www.googleapis.com/auth/spreadsheets',
+        apiKey: sheetsConfig.apiKey,
+        clientId: sheetsConfig.clientId,
+        discoveryDocs: sheetsConfig.discoveryDocs,
+        scope: sheetsConfig.scope,
       })
       .then(() => {
         window.gapi.auth2
