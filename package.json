@@ -8,7 +8,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.tsx' --project tsconfig.json",
-    "deploy": "CI=true yarn test && yarn lint && yarn build"
+    "lint:css": "stylelint './src/**/*.tsx'",
+    "deploy": "CI=true yarn lint:css && yarn lint && yarn test && yarn build"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
@@ -19,7 +20,21 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
+    "styled-components": "^4.1.3",
     "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/reach__router": "^1.2.2",
+    "@types/styled-components": "^4.1.6",
+    "prettier": "^1.15.3",
+    "stylelint": "^9.10.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.5.2",
+    "tslint": "^5.12.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,13 +44,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@types/reach__router": "^1.2.2",
-    "prettier": "^1.15.3",
-    "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-react": "^3.6.0"
-  }
+  ]
 }

@@ -1,8 +1,8 @@
 import React, { Component, ChangeEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import styled from 'styled-components';
 import { SubmitForm } from '../../models';
 import { addNewSubmition } from '../../lib/gapi';
-import './SubmitPage.css';
 
 interface IProps extends RouteComponentProps {
   isSignedIn: boolean;
@@ -12,6 +12,28 @@ interface IState extends SubmitForm {
   error: string;
   isSubmitted: boolean;
 }
+
+const SubmitInput = styled.input`
+  padding: 1rem;
+  width: 100%;
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+`;
+
+const SubmitButton = styled.button`
+  padding: 1.5rem 2.5rem;
+  font-size: 2rem;
+`;
+
+const SubmitError = styled.div`
+  color: red;
+`;
+
+const SubmitSuccess = styled.div`
+  color: white;
+  background: green;
+`;
 
 export class SubmitPage extends Component<IProps, IState> {
   public state = {
@@ -67,7 +89,7 @@ export class SubmitPage extends Component<IProps, IState> {
 
   public renderSubmitSuccessMessage = () => {
     if (this.state.isSubmitted) {
-      return <div className="submit-success">Successfully submitted!</div>;
+      return <SubmitSuccess>Successfully submitted!</SubmitSuccess>;
     }
   }
 
@@ -76,12 +98,11 @@ export class SubmitPage extends Component<IProps, IState> {
 
     return (
       <div>
-        {error && <div className="submit-error">{error}</div>}
+        {error && <SubmitError>{error}</SubmitError>}
         {this.renderSubmitSuccessMessage()}
         <label htmlFor="title">
           Title
-          <input
-            className="submit-input"
+          <SubmitInput
             type="text"
             value={title}
             onChange={this.handleTitleChange}
@@ -89,16 +110,13 @@ export class SubmitPage extends Component<IProps, IState> {
         </label>
         <label htmlFor="url">
           URL
-          <input
-            className="submit-input"
+          <SubmitInput
             type="text"
             value={url}
             onChange={this.handleUrlChange}
           />
         </label>
-        <button className="submit-button" onClick={this.handleSubmitClick}>
-          Submit
-        </button>
+        <SubmitButton onClick={this.handleSubmitClick}>Submit</SubmitButton>
       </div>
     );
   }

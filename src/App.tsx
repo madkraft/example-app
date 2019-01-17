@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
-import './App.css';
 import { Container, Header } from './components';
 import { ListPage, SubmitPage } from './pages';
 import { addGapiScript } from './lib/gapi';

@@ -22,7 +22,8 @@
       "severity": "warning",
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
     },
-    "semicolon": true
+    "semicolon": true,
+    "variable-name": false
   },
   "jsRules": {
     "max-line-length": {

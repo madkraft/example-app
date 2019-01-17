@@ -9,11 +9,13 @@ https://app.netlify.com/sites/optimistic-ride-596734/overview
 Sheets docs:
 https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
 
+https://todoist.com
+
 Next:
 
-- [ ] git hooks with husky
-- [ ] styled-components
+- [x] styled-components
 - [ ] Remove posts
+- [ ] git hooks with husky
 - [ ] recompose
 - [ ] react lazy and suspense
 
@@ -23,15 +25,30 @@ Use:
 - [ ] use service worker to cache response for specified time
 - [x] reach router
 - [ ] react hooks
+- [ ] graphQl
 
 Add:
 
 - [x] prettier
 - [x] tslint
 - [x] Host on netlify
+- [x] stylelint with styled components?
+- [ ] tests with react-testing lib
 - [ ] server-side rendering
-- [ ] stylelint with styled components?
+- [ ] theming
+- [ ] redux
 
 Try:
 
 - [ ] badger app
+
+Features:
+
+- [ ] search
+- [ ] tags
+- [ ] edit tags
+- [ ] see read articles
+- [ ] mark as read
+- [ ] favourite articles
+- [ ] give priority (flags)
+- [ ] caching strategies

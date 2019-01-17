@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import './Container.css';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
 
 export class Container extends Component {
   public render() {
-    return <div className="container">{this.props.children}</div>;
+    return <Wrapper>{this.props.children}</Wrapper>;
   }
 }

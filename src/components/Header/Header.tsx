@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { Navigation } from '../Navigation';
-import './Header.css';
+import styled from 'styled-components';
 
 interface IProps {
   isSignedIn: boolean;
 }
+
+const HeaderWrapper = styled.div`
+  background-color: #ff6600;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.span`
+  margin-right: 2rem;
+`;
 
 export class Header extends Component<IProps> {
   public handleSignInClick = () => {
@@ -28,13 +40,13 @@ export class Header extends Component<IProps> {
 
   public render() {
     return (
-      <div className="header">
+      <HeaderWrapper>
         <div>
-          <span className="title">My Hacker News</span>
+          <Title>My Hacker News</Title>
           <Navigation />
         </div>
         {this.renderSingInButtons()}
-      </div>
+      </HeaderWrapper>
     );
   }
 }
