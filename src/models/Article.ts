@@ -1,11 +1,16 @@
-export interface Article {
+export interface IArticle {
   title: string;
-  id: string;
   url: string;
   tags?: string[];
 }
 
-export interface SubmitForm {
+export interface ISubmitForm {
   title: string;
   url: string;
+}
+
+export interface IRecord {
+  createdTime: string;
+  id: string;
+  fields: IArticle;
 }

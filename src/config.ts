@@ -7,3 +7,9 @@ export const sheetsConfig = {
   script: 'https://apis.google.com/js/api.js',
   spreadsheetId: '1_CgPF5ax_x1NrODpOx9-vtGSIPPH03tTtfCMTTscX1w',
 };
+
+export const airtableConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  base: 'appwLVBkLzZmVPFCx',
+  endpoint: '',
+};

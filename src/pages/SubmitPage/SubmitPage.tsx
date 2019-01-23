@@ -1,14 +1,10 @@
 import React, { Component, ChangeEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
-import { SubmitForm } from '../../models';
-import { addNewSubmition } from '../../lib/gapi';
+import { ISubmitForm } from '../../models';
+import { addNewSubmition } from '../../lib/api';
 
-interface IProps extends RouteComponentProps {
-  isSignedIn: boolean;
-}
-
-interface IState extends SubmitForm {
+interface IState extends ISubmitForm {
   error: string;
   isSubmitted: boolean;
 }
@@ -35,7 +31,7 @@ const SubmitSuccess = styled.div`
   background: green;
 `;
 
-export class SubmitPage extends Component<IProps, IState> {
+export class SubmitPage extends Component<RouteComponentProps, IState> {
   public state = {
     error: '',
     isSubmitted: false,
@@ -59,12 +55,12 @@ export class SubmitPage extends Component<IProps, IState> {
 
   public handleSubmitClick = () => {
     const { title, url } = this.state;
-    const { isSignedIn } = this.props;
     const isTitle = title && title.length > 0;
     const isUrl = url && url.length > 0;
 
-    if (isTitle && isUrl && isSignedIn) {
-      addNewSubmition({ title, url }, this.onSubmitSuccess);
+    if (isTitle && isUrl) {
+      // addNewSubmition({ title, url }, this.onSubmitSuccess);
+      addNewSubmition();
       this.resetForm();
     } else {
       this.setState(() => ({

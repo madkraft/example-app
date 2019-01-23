@@ -3,7 +3,9 @@ html {
   font-size: 10px;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -25,6 +27,5 @@ a {
 }
 
 ul {
-  list-style-type: none;
   padding: 0;
 }

@@ -1,3 +1,1 @@
-interface Window {
-  gapi: any;
-}
+interface Window {}

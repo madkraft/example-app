@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Article } from '../../models';
+import { IRecord } from '../../models';
 import { ListArticle } from '../ListArticle';
 
 interface IProps {
-  articles: Article[];
+  articles: IRecord[];
 }
 
 export class List extends Component<IProps> {
-  public renderListItem = (article: Article) => {
+  public renderListItem = (article: IRecord) => {
     return (
       <li key={article.id}>
-        <ListArticle {...article} />
+        <ListArticle {...article.fields} />
       </li>
     );
   }
