@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.tsx' --project tsconfig.json",
     "lint:css": "stylelint './src/**/*.tsx'",
-    "deploy": "CI=true yarn lint:css && yarn lint && yarn test && yarn build"
+    "deploy": "yarn lint:css && yarn lint && CI=true yarn test && yarn build"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
