@@ -16,6 +16,10 @@ export class List extends Component<IProps> {
   }
 
   public render() {
+    if (!this.props.articles) {
+      return <div>No articles</div>;
+    }
+
     return (
       <ul>
         {this.props.articles.map(article => this.renderListItem(article))}
