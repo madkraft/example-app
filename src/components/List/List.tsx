@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { IRecord } from '../../models';
 import { ListArticle } from '../ListArticle';
 
@@ -10,7 +11,7 @@ export class List extends Component<IProps> {
   public renderListItem = (article: IRecord) => {
     return (
       <li key={article.id}>
-        <ListArticle {...article.fields} />
+        <ListArticle {...article.fields} id={article.id} />
       </li>
     );
   }

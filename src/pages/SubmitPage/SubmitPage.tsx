@@ -59,8 +59,9 @@ export class SubmitPage extends Component<RouteComponentProps, IState> {
     const isUrl = url && url.length > 0;
 
     if (isTitle && isUrl) {
-      // addNewSubmition({ title, url }, this.onSubmitSuccess);
-      addNewSubmition();
+      addNewSubmition({ title, url })
+        .then(() => this.onSubmitSuccess())
+        .catch(() => this.onSubmitError());
       this.resetForm();
     } else {
       this.setState(() => ({
@@ -72,6 +73,12 @@ export class SubmitPage extends Component<RouteComponentProps, IState> {
   public onSubmitSuccess = () => {
     this.setState(() => ({
       isSubmitted: true,
+    }));
+  }
+
+  public onSubmitError = () => {
+    this.setState(() => ({
+      error: 'Server error. Could not add',
     }));
   }
 

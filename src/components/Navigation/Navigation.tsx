@@ -6,11 +6,13 @@ export class Navigation extends Component {
     return (
       <>
         <Link key="latest" to="/">
-          Latest |
+          Latest
         </Link>
+        |
         <Link key="submit" to="/submit">
           Submit
         </Link>
+        | Starred
       </>
     );
   }

@@ -2,6 +2,7 @@ export interface IArticle {
   title: string;
   url: string;
   tags?: string[];
+  starred?: boolean;
 }
 
 export interface ISubmitForm {

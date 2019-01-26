@@ -52,3 +52,4 @@ Features:
 - [ ] favourite articles
 - [ ] give priority (flags)
 - [ ] caching strategies
+- [x] optimistic UI updates
