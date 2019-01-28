@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
-import { Container, Header } from './components';
-import { ListPage, SubmitPage } from './pages';
+import { Container, Header, List } from './components';
+import { SubmitPage } from './pages';
 
 class App extends Component<{}, {}> {
   public render() {
@@ -10,7 +10,7 @@ class App extends Component<{}, {}> {
         <Header />
         <Container>
           <Router>
-            <ListPage path="/" />
+            <List path="/" />
             <SubmitPage path="/submit" />
           </Router>
         </Container>

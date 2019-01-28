@@ -1,30 +1,84 @@
 import React, { Component } from 'react';
+import { RouteComponentProps } from '@reach/router';
 
 import { IRecord } from '../../models';
 import { ListArticle } from '../ListArticle';
+import { deleteRecord, fetchRecords } from '../../lib/api';
 
-interface IProps {
+interface IState {
   articles: IRecord[];
+  error: null | string;
+  loading: boolean;
 }
 
-export class List extends Component<IProps> {
+export class List extends Component<RouteComponentProps, IState> {
+  public state = {
+    articles: [],
+    error: null,
+    loading: false,
+  };
+
+  public componentDidMount() {
+    this.setState(() => ({
+      loading: true,
+    }));
+    fetchRecords()
+      .then((records: IRecord[]) => {
+        this.setState(() => ({
+          articles: records,
+          loading: false,
+        }));
+      })
+      .catch(() => {
+        this.setState(() => ({
+          error: 'Failed to fetch data',
+          loading: false,
+        }));
+      });
+  }
+
+  public removeArticle = (id: string) => {
+    const originalArticles = this.state.articles;
+
+    this.setState(state => ({
+      articles: state.articles.filter(article => article.id !== id),
+    }));
+
+    deleteRecord(id).catch(() => {
+      this.setState(() => ({
+        articles: originalArticles,
+        error: 'Failed to remove the article',
+      }));
+    });
+  }
+
   public renderListItem = (article: IRecord) => {
     return (
       <li key={article.id}>
-        <ListArticle {...article.fields} id={article.id} />
+        <ListArticle
+          {...article.fields}
+          id={article.id}
+          removeArticle={this.removeArticle}
+        />
       </li>
     );
   }
 
   public render() {
-    if (!this.props.articles) {
-      return <div>No articles</div>;
+    const { articles, error, loading } = this.state;
+
+    if (error) {
+      return <div>Oh no! {error}</div>;
     }
 
-    return (
-      <ul>
-        {this.props.articles.map(article => this.renderListItem(article))}
-      </ul>
-    );
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (!articles.length) {
+      return <div>No available articles</div>;
+    }
+
+    return <ul>{articles.map(article => this.renderListItem(article))}</ul>;
   }
 }

@@ -1,6 +1,7 @@
 export interface IArticle {
   title: string;
   url: string;
+  createdTime: string;
   tags?: string[];
   starred?: boolean;
 }

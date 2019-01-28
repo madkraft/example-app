@@ -11,6 +11,9 @@ https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/g
 
 https://todoist.com
 
+icons
+https://www.flaticon.com/packs/essentials-14/2
+
 Next:
 
 - [x] styled-components

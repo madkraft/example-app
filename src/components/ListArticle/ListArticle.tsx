@@ -3,10 +3,12 @@ import { IArticle } from '../../models';
 import styled from 'styled-components';
 import { ReactComponent as ReactStar } from '../../assets/star.svg';
 import { ReactComponent as ReactStarFilled } from '../../assets/star-filled.svg';
+import { ReactComponent as ReactDelete } from '../../assets/trash.svg';
 import { updateFavouriteStatus } from '../../lib/api';
 
 interface IProps extends IArticle {
   id: string;
+  removeArticle: (id: string) => void;
 }
 
 interface IState {
@@ -17,10 +19,34 @@ const ListItem = styled.div`
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  & .opaque {
+    opacity: 0.6;
+  }
+
+  & .hidden {
+    display: none;
+  }
+
+  &:hover {
+    & .opaque {
+      opacity: 1;
+    }
+
+    & .hidden {
+      display: inline-block;
+    }
+  }
 `;
 
-const Title = styled.h2`
-  font-weight: normal;
+const Content = styled.div`
+  width: 100%;
+`;
+
+const Title = styled.div`
+  /* font-weight: normal; */
+  font-size: 2rem;
   margin: 0 0 -1rem;
 `;
 
@@ -32,14 +58,14 @@ const Tag = styled.span`
   padding: 0.5rem;
 `;
 
-const StarButton = styled.button<{ size: string; starred: boolean }>`
-  padding: 0;
+const IconButton = styled.button<{ size: string }>`
+  padding: 0.5rem;
   width: ${props => `${props.size}rem`};
   height: ${props => `${props.size}rem`};
   background: none;
   border: none;
   cursor: pointer;
-  margin-right: 1rem;
+  margin: 0 1rem;
 `;
 
 export class ListArticle extends Component<IProps, IState> {
@@ -55,6 +81,12 @@ export class ListArticle extends Component<IProps, IState> {
     });
   }
 
+  public handleRemoveClick = () => {
+    const { id, removeArticle } = this.props;
+
+    removeArticle(id);
+  }
+
   public renderTags = () => {
     return (
       this.props.tags && this.props.tags.map(tag => <Tag key={tag}>{tag}</Tag>)
@@ -66,16 +98,25 @@ export class ListArticle extends Component<IProps, IState> {
 
     return (
       <ListItem>
-        <StarButton size="2" starred={starred} onClick={this.handleStarClick}>
+        <IconButton className="opaque" size="3" onClick={this.handleStarClick}>
           {starred ? <ReactStarFilled /> : <ReactStar />}
-        </StarButton>
-        <div>
+        </IconButton>
+        <Content>
           <Title>
             <a href={this.props.url} target="_blank" rel="noopener noreferrer">
               {this.props.title}
             </a>
           </Title>
           {this.renderTags()}
+        </Content>
+        <div>
+          <IconButton
+            className="hidden"
+            size="3"
+            onClick={this.handleRemoveClick}
+          >
+            <ReactDelete />
+          </IconButton>
         </div>
       </ListItem>
     );
