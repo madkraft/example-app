@@ -1,13 +1,7 @@
 All the technologies I want to try.
 
-Google console:
-https://console.developers.google.com/apis/dashboard?project=articles&duration=PT1H
-
 Host on netlify
 https://app.netlify.com/sites/optimistic-ride-596734/overview
-
-Sheets docs:
-https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
 
 https://todoist.com
 

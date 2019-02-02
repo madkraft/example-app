@@ -9,10 +9,14 @@ export class Navigation extends Component {
           Latest
         </Link>
         |
-        <Link key="submit" to="/submit">
+        <Link key="submit" to="submit">
           Submit
         </Link>
-        | Starred
+        |
+        <Link key="starred" to="starred">
+          Starred
+        </Link>
+        {/* <Link to="?relative=query&sure=why+not">Relative query</Link> */}
       </>
     );
   }

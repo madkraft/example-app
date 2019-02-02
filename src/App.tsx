@@ -11,7 +11,8 @@ class App extends Component<{}, {}> {
         <Container>
           <Router>
             <List path="/" />
-            <SubmitPage path="/submit" />
+            <List path=":sort" />
+            <SubmitPage path="submit" />
           </Router>
         </Container>
       </div>

@@ -3,7 +3,11 @@ import { RouteComponentProps } from '@reach/router';
 
 import { IRecord } from '../../models';
 import { ListArticle } from '../ListArticle';
-import { deleteRecord, fetchRecords } from '../../lib/api';
+import { deleteRecord, fetchRecords, SortFields } from '../../lib/api';
+
+interface IProps extends RouteComponentProps {
+  sort?: SortFields;
+}
 
 interface IState {
   articles: IRecord[];
@@ -11,30 +15,25 @@ interface IState {
   loading: boolean;
 }
 
-export class List extends Component<RouteComponentProps, IState> {
+export class List extends Component<IProps, IState> {
   public state = {
     articles: [],
     error: null,
     loading: false,
   };
 
+  public componentDidUpdate(prevProps: IProps) {
+    if (this.props.sort !== prevProps.sort) {
+      this.fetchData();
+    }
+  }
+
   public componentDidMount() {
     this.setState(() => ({
       loading: true,
     }));
-    fetchRecords()
-      .then((records: IRecord[]) => {
-        this.setState(() => ({
-          articles: records,
-          loading: false,
-        }));
-      })
-      .catch(() => {
-        this.setState(() => ({
-          error: 'Failed to fetch data',
-          loading: false,
-        }));
-      });
+
+    this.fetchData();
   }
 
   public removeArticle = (id: string) => {
@@ -80,5 +79,21 @@ export class List extends Component<RouteComponentProps, IState> {
     }
 
     return <ul>{articles.map(article => this.renderListItem(article))}</ul>;
+  }
+
+  private fetchData = () => {
+    fetchRecords(this.props.sort)
+      .then((records: IRecord[]) => {
+        this.setState(() => ({
+          articles: records,
+          loading: false,
+        }));
+      })
+      .catch(() => {
+        this.setState(() => ({
+          error: 'Failed to fetch data',
+          loading: false,
+        }));
+      });
   }
 }

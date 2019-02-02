@@ -2,6 +2,8 @@ import { IArticle } from './../models/Article';
 import { airtableConfig } from './../config';
 
 const BASE_URL = `https://api.airtable.com/v0/${airtableConfig.base}/Articles`;
+export type SortDirection = 'desc' | 'asc';
+export type SortFields = 'createdTime' | 'starred';
 
 const METHOD = {
   DELETE: 'DELETE',
@@ -27,16 +29,24 @@ const createConfig = (method?: string, fields?: Partial<IArticle>) => {
 };
 
 // type
-export const fetchRecords = () => {
-  const field = `${encodeURIComponent('sort[0][field]')}=createdTime`;
-  const direction = `${encodeURIComponent('sort[0][direction]')}=desc`;
-  const defaultSort = `${field}&${direction}`;
+export const fetchRecords = (sortField: SortFields = 'createdTime') => {
+  const field = sortBy(sortField);
+  const direction = sortDirection('desc');
+  const sort = `${field}&${direction}`;
 
-  return fetch(`${BASE_URL}?${defaultSort}`, createConfig())
+  return fetch(`${BASE_URL}?${sort}`, createConfig())
     .then(resp => resp.json())
     .then(({ records }) => {
       return records;
     });
+};
+
+const sortBy = (field: string) => {
+  return `${encodeURIComponent('sort[0][field]')}=${field}`;
+};
+
+const sortDirection = (direction: SortDirection) => {
+  return `${encodeURIComponent('sort[0][direction]')}=${direction}`;
 };
 
 export const addNewSubmition = ({ title, url, tags }: Partial<IArticle>) => {
