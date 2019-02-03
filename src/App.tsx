@@ -7,8 +7,7 @@ import { Container, Header, List } from './components';
 import { SubmitPage } from './pages';
 
 const client = new ApolloClient({
-  // uri: 'https://c9ffdxfrmzjwpnc2w2ve.herokuapp.com',
-  uri: 'http://localhost:4000',
+  uri: process.env.REACT_APP_GQL_SERVER,
 });
 
 class App extends Component<{}, {}> {
