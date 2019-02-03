@@ -13,7 +13,6 @@ Next:
 - [x] styled-components
 - [ ] Remove posts
 - [ ] git hooks with husky
-- [ ] recompose
 - [ ] react lazy and suspense
 
 Use:
@@ -22,7 +21,8 @@ Use:
 - [ ] use service worker to cache response for specified time
 - [x] reach router
 - [ ] react hooks
-- [ ] graphQl
+- [x] graphQl server
+- [x] apollo server / client
 
 Add:
 
@@ -33,7 +33,7 @@ Add:
 - [ ] tests with react-testing lib
 - [ ] server-side rendering
 - [ ] theming
-- [ ] redux
+- [ ] redux ???
 
 Try:
 
@@ -42,11 +42,11 @@ Try:
 Features:
 
 - [ ] search
-- [ ] tags
+- [x] tags
 - [ ] edit tags
 - [ ] see read articles
 - [ ] mark as read
-- [ ] favourite articles
+- [x] favourite articles
 - [ ] give priority (flags)
 - [ ] caching strategies
 - [x] optimistic UI updates

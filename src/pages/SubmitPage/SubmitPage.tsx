@@ -2,7 +2,7 @@ import React, { Component, ChangeEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
 import { ISubmitForm } from '../../models';
-import { addNewSubmition } from '../../lib/api';
+// import { addNewSubmition } from '../../lib/api';
 
 interface IState extends ISubmitForm {
   error: string;
@@ -59,10 +59,10 @@ export class SubmitPage extends Component<RouteComponentProps, IState> {
     const isUrl = url && url.length > 0;
 
     if (isTitle && isUrl) {
-      addNewSubmition({ title, url })
-        .then(() => this.onSubmitSuccess())
-        .catch(() => this.onSubmitError());
-      this.resetForm();
+      // addNewSubmition({ title, url })
+      //   .then(() => this.onSubmitSuccess())
+      //   .catch(() => this.onSubmitError());
+      // this.resetForm();
     } else {
       this.setState(() => ({
         error: 'Please fill in the form',

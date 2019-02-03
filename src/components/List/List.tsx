@@ -1,99 +1,66 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 
-import { IRecord } from '../../models';
 import { ListArticle } from '../ListArticle';
-import { deleteRecord, fetchRecords, SortFields } from '../../lib/api';
 
-interface IProps extends RouteComponentProps {
-  sort?: SortFields;
+interface IRequestedArticle {
+  title: string;
+  id: string;
+  url: string;
+  starred: boolean;
 }
 
-interface IState {
-  articles: IRecord[];
-  error: null | string;
-  loading: boolean;
-}
-
-export class List extends Component<IProps, IState> {
-  public state = {
-    articles: [],
-    error: null,
-    loading: false,
-  };
-
-  public componentDidUpdate(prevProps: IProps) {
-    if (this.props.sort !== prevProps.sort) {
-      this.fetchData();
+export const ALL_ARTICLES_QUERY = gql`
+  query ALL_ARTICLES_QUERY {
+    articles {
+      title
+      id
+      url
+      starred
     }
   }
+`;
 
-  public componentDidMount() {
-    this.setState(() => ({
-      loading: true,
-    }));
+export const List: FunctionComponent<RouteComponentProps> = () => {
+  // public componentDidUpdate(prevProps: IProps) {
+  //   if (this.props.sort !== prevProps.sort) {
+  //     this.fetchData();
+  //   }
+  // }
 
-    this.fetchData();
-  }
+  // public removeArticle = (id: string) => {
+  //   const originalArticles = this.state.articles;
 
-  public removeArticle = (id: string) => {
-    const originalArticles = this.state.articles;
+  //   this.setState(state => ({
+  //     articles: state.articles.filter(article => article.id !== id),
+  //   }));
 
-    this.setState(state => ({
-      articles: state.articles.filter(article => article.id !== id),
-    }));
+  //   deleteRecord(id).catch(() => {
+  //     this.setState(() => ({
+  //       articles: originalArticles,
+  //       error: 'Failed to remove the article',
+  //     }));
+  //   });
+  // }
 
-    deleteRecord(id).catch(() => {
-      this.setState(() => ({
-        articles: originalArticles,
-        error: 'Failed to remove the article',
-      }));
-    });
-  }
+  return (
+    <Query query={ALL_ARTICLES_QUERY}>
+      {({ data, error, loading }) => {
+        if (loading) return <div>Loading...</div>;
+        if (error) return <div>Oh no! {error}</div>;
+        if (!data.articles) return <div>No articles yet</div>;
 
-  public renderListItem = (article: IRecord) => {
-    return (
-      <li key={article.id}>
-        <ListArticle
-          {...article.fields}
-          id={article.id}
-          removeArticle={this.removeArticle}
-        />
-      </li>
-    );
-  }
-
-  public render() {
-    const { articles, error, loading } = this.state;
-
-    if (error) {
-      return <div>Oh no! {error}</div>;
-    }
-
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-
-    if (!articles.length) {
-      return <div>No available articles</div>;
-    }
-
-    return <ul>{articles.map(article => this.renderListItem(article))}</ul>;
-  }
-
-  private fetchData = () => {
-    fetchRecords(this.props.sort)
-      .then((records: IRecord[]) => {
-        this.setState(() => ({
-          articles: records,
-          loading: false,
-        }));
-      })
-      .catch(() => {
-        this.setState(() => ({
-          error: 'Failed to fetch data',
-          loading: false,
-        }));
-      });
-  }
-}
+        // learn how to type Query to know the shape of data
+        return (
+          <ul>
+            {data.articles.map((payload: IRequestedArticle) => (
+              <ListArticle key={payload.id} {...payload} />
+            ))}
+          </ul>
+        );
+      }}
+    </Query>
+  );
+};

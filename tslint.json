@@ -23,6 +23,8 @@
       "severity": "warning",
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
     },
+    "jsx-no-multiline-js": false,
+    "ter-arrow-parens": false,
     "semicolon": true,
     "variable-name": false
   },

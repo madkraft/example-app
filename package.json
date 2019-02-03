@@ -9,23 +9,31 @@
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.tsx' --project tsconfig.json",
     "lint:css": "stylelint './src/**/*.tsx'",
-    "deploy": "yarn lint:css && yarn lint && CI=true yarn test && yarn build"
+    "deploy": "yarn lint:css && yarn lint && CI=true yarn test && yarn build",
+    "introspect-schema": "apollo-codegen introspect-schema http://localhost:4000 --output ./src/types/schema.json",
+    "generate-schema": "apollo-codegen generate **/*.ts --schema ./src/types/schema.json --target typescript --output ./src/types/operation-result-types.ts"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "apollo-boost": "^0.1.27",
     "react": "^16.7.0",
+    "graphql-tag": "^2.10.1",
+    "react-apollo": "^2.4.1",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
     "styled-components": "^4.1.3",
     "typescript": "^3.2.2"
   },
   "devDependencies": {
+    "@types/graphql": "^14.0.5",
     "@types/jest": "23.3.12",
     "@types/node": "10.12.18",
     "@types/reach__router": "^1.2.2",
     "@types/react": "16.7.18",
     "@types/react-dom": "16.0.11",
     "@types/styled-components": "^4.1.6",
+    "apollo-codegen": "^0.20.2",
+    "graphql": "^14.1.1",
     "prettier": "^1.15.3",
     "stylelint": "^9.10.0",
     "stylelint-config-recommended": "^2.1.0",
